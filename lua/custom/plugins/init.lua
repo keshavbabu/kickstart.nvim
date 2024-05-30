@@ -1,5 +1,26 @@
--- You can add your own plugins here or in other files in this directory!
---  I promise not to create any merge conflicts in this directory :)
---
--- See the kickstart.nvim README for more information
-return {}
+return {
+  {
+    'nvim-tree/nvim-tree.lua',
+    cmd = { 'NvimTreeToggle', 'NvimTreeFocus' },
+    init = function()
+      -- load mappings here
+      require 'custom.plugins.nvimtree.mappings'
+    end,
+    opts = function()
+      -- load opts
+      return require 'custom.plugins.nvimtree.opts'
+    end,
+    config = function(_, opts)
+      require('nvim-tree').setup(opts)
+    end,
+  },
+  {
+    'NvChad/nvterm',
+    init = function()
+      require 'custom.plugins.nvterm.mappings'
+    end,
+    config = function(_, opts)
+      require('nvterm').setup(opts)
+    end,
+  },
+}
